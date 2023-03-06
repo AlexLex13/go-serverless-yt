@@ -6,7 +6,11 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-var ErrorMethodNotAllowed = "Method not allowed"
+var ErrorMethodNotAllowed = "Method is not allowed"
+
+type ErrorBody struct {
+	ErrorMsg *string `json:"error,omitempty"`
+}
 
 func GetUser() {
 

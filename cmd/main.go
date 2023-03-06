@@ -8,8 +8,13 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 
 	"github.com/AlexLex13/go-serverless-yt/pkg/handlers"
+)
+
+var (
+	dynaClient dynamodbiface.DynamoDBAPI
 )
 
 func main() {
@@ -20,7 +25,7 @@ func main() {
 	if err != nil {
 		return
 	}
-	dynaClient := dynamodb.New(awsSession)
+	dynaClient = dynamodb.New(awsSession)
 	lambda.Start(handler)
 }
 

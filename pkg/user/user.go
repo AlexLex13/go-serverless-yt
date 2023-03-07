@@ -3,6 +3,7 @@ package user
 import (
 	"errors"
 
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
@@ -10,7 +11,15 @@ import (
 )
 
 var (
-	ErrorFailedToFetchRecord = "Failed to fetch record"
+	ErrorFailedToUnmarshalRecord = "Failed to unmarshal record"
+	ErrorFailedToFetchRecord     = "Failed to fetch record"
+	ErrorInvalidUserData         = "Invalid user data"
+	ErrorInvalidEmail            = "Invalid email"
+	ErrorCouldNotMarshalItem     = "Could not marshal item"
+	ErrorCouldNotDeleteItem      = "Could not delete item"
+	ErrorCouldNotDynamoPutItem   = "Could not dynamo put item"
+	ErrorUserAlreadyExists       = "User already exists"
+	ErrorUserDoesNotExist        = "User does not exist"
 )
 
 type User struct {
@@ -62,7 +71,10 @@ func FetchUsers(tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*[]User
 	return item, nil
 }
 
-func CreateUser() {
+func CreateUser(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (
+	*User, error) {
+
+	var u User
 
 }
 
